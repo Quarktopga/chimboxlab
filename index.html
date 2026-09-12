@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChimBox Lab</title>
+<style>
+:root{--wall:#d9edf5;--wood:#a87952;--wood-dark:#795237;--bench:#9b6848;--glass:#dff5ff;--ink:#17232b;--muted:#60727d;--white:#fff;--red:#bd3c3c}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:#c8d9df}
+button{font:inherit}.app{height:100vh;min-width:1100px;display:flex;flex-direction:column}
+header{height:70px;background:#fff;border-bottom:1px solid #ccd6da;display:flex;align-items:center;padding:0 30px;z-index:5}
+.logo{font-weight:800;font-size:23px;letter-spacing:-.5px}.logo span{font-weight:400;color:#71818a}.headerline{height:24px;width:1px;background:#d6dde0;margin:0 18px}.headerhint{font-size:13px;color:#71818a}.header-right{margin-left:auto;font-size:12px;color:#75858c}
+.scene{position:relative;flex:1;overflow:hidden;background:var(--wall)}
+.wall-light{position:absolute;inset:0;background:linear-gradient(115deg,#e8f6fa 0,#d9edf5 55%,#cfe6ef 100%)}
+.shelf{position:absolute;left:7%;right:7%;top:15%;height:18px;background:linear-gradient(#bd916a,#9a6b48);border-radius:3px;box-shadow:0 7px 0 #754e37,0 12px 22px #526b7550}
+.shelf-label{position:absolute;top:10%;left:7%;font-size:12px;letter-spacing:2px;font-weight:700;color:#718892}
+.category{position:absolute;top:2%;width:24%;height:31%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s}
+.category:hover{transform:translateY(-3px)}.cat1{left:9%}.cat2{left:38%}.cat3{right:9%}
+.cat-caption{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:12px;font-weight:700;color:#536871;opacity:.9}
+.flask{width:95px;height:125px;position:relative}.flask-neck{position:absolute;left:37px;top:0;width:21px;height:53px;border:3px solid #71838b;border-bottom:0;background:#ffffff65}.flask-body{position:absolute;left:5px;right:5px;bottom:0;height:82px;border:3px solid #71838b;border-radius:12px 12px 38px 38px;background:#ffffff55;transform:skewX(-5deg)}.flask-rim{position:absolute;left:33px;top:-4px;width:29px;height:8px;border:3px solid #71838b;border-radius:4px;background:#eefaff}
+.rack{width:145px;height:115px;position:relative}.rack-base{position:absolute;bottom:9px;left:8px;right:8px;height:18px;background:#795238;border-radius:4px;box-shadow:inset 0 3px #a97958}.rack-top{position:absolute;top:0;left:8px;right:8px;height:17px;background:#8c6042;border-radius:4px}.rack-leg{position:absolute;top:12px;bottom:10px;width:10px;background:#765039}.rack-leg.l{left:14px}.rack-leg.r{right:14px}.test-tube{position:absolute;top:10px;width:25px;height:83px;border:2px solid #a8bdc5;border-top:0;border-radius:0 0 13px 13px;background:#ffffff55;overflow:hidden}.test-tube:before{content:"";position:absolute;top:-4px;left:-2px;right:-2px;height:7px;border:2px solid #a8bdc5;border-radius:3px;background:#eefaff}.test-tube i{position:absolute;bottom:2px;left:2px;right:2px;height:54%;border-radius:0 0 9px 9px}.t1{left:31px}.t2{left:61px}.t3{left:91px}.t1 i{background:#3d8fd0}.t2 i{background:#df8743}.t3 i{background:#59a56d}
+.phmeter{width:150px;height:125px;position:relative}.ph-rod{position:absolute;left:23px;top:4px;width:8px;height:92px;background:#20252a;border-radius:5px;transform:rotate(7deg)}.ph-body{position:absolute;right:6px;top:12px;width:83px;height:62px;background:#d74a43;border:4px solid #762d2d;border-radius:9px;box-shadow:inset 0 3px #f4877e}.dial{position:absolute;left:15px;top:11px;width:45px;height:35px;border-radius:50%;background:#f4eeee;border:2px solid #633b3b}.dial:after{content:"";position:absolute;left:21px;top:7px;width:2px;height:17px;background:#242424;transform:rotate(18deg);transform-origin:bottom}
+.bench{position:absolute;left:0;right:0;bottom:0;height:47%;background:linear-gradient(180deg,#b9825d 0,#9b6848 10%,#8d5d42 100%);border-top:10px solid #744c37;box-shadow:inset 0 15px 35px #633f2c55}
+.bench-front{position:absolute;inset:35px 4% 10% 4%;border:2px solid #6f4935;border-radius:12px;background:linear-gradient(180deg,#a9704f,#8f5d43);box-shadow:inset 0 2px #c99470}
+.slots{position:absolute;left:7%;right:7%;top:13%;bottom:15%;display:grid;grid-template-columns:repeat(3,1fr);gap:5%}
+.slot{position:relative;border:2px dashed #d5aa8b;border-radius:13px;background:#ffffff12;transition:.15s}.slot:hover{background:#fff2;border-color:#f0d0b9}.slot-label{position:absolute;top:9px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:1.5px;color:#e5c3aa;font-weight:700}.slot-content{position:absolute;inset:27px 10px 10px;display:flex;align-items:center;justify-content:center}
+.beaker{width:120px;height:135px;position:relative}.beaker-glass{position:absolute;left:15px;right:15px;top:22px;bottom:4px;border:3px solid #b5d0d8;border-top:0;border-radius:3px 3px 13px 13px;background:#ffffff55;box-shadow:inset 8px 0 #ffffff45}.beaker-rim{position:absolute;left:10px;right:10px;top:17px;height:11px;border:3px solid #b5d0d8;border-radius:4px;background:#eefaffaa}.liquidfill{position:absolute;left:18px;right:18px;bottom:8px;height:42%;border-radius:0 0 9px 9px;opacity:.78}.graduations{position:absolute;right:22px;top:45px;width:20px;height:68px;border-right:1px solid #7e979f;background:repeating-linear-gradient(to bottom,transparent 0 12px,#7e979f 12px 13px)}.beaker-label{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:10px;color:#50646d;font-weight:700}
+.item-icon{max-width:120px;max-height:105px}.material-icon{font-size:28px}
+.hovercard{position:absolute;display:none;z-index:20;width:250px;background:#fff;border:1px solid #cfd7da;border-radius:8px;padding:12px 14px;box-shadow:0 12px 30px #334b5550;font-size:12px;pointer-events:none}.hovercard strong{display:block;font-size:13px;margin-bottom:7px}.detail{display:flex;justify-content:space-between;padding:3px 0;border-top:1px solid #edf0f1}.detail span:first-child{color:#718089}
+.library{position:absolute;inset:0;background:#edf4f6eF;backdrop-filter:blur(3px);z-index:30;display:none;flex-direction:column}.library.open{display:flex}.lib-head{height:78px;background:#fff;border-bottom:1px solid #d2dadd;display:flex;align-items:center;padding:0 34px}.lib-title{font-size:22px;font-weight:800}.lib-sub{margin-left:16px;color:#77868c;font-size:12px}.close{margin-left:auto;border:1px solid #cdd6d9;background:#fff;border-radius:7px;padding:8px 14px;cursor:pointer}.lib-body{flex:1;padding:30px 5%;overflow:auto}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:#fff;border:1px solid #d4dddf;border-radius:12px;min-height:190px;padding:18px;cursor:pointer;transition:.15s;position:relative}.card:hover{transform:translateY(-2px);box-shadow:0 9px 25px #51656e20}.card.selected{border:2px solid #385f6d;box-shadow:0 0 0 3px #b9d2da}.card-visual{height:82px;display:flex;align-items:center;justify-content:center}.card h3{margin:8px 0 4px;font-size:14px}.card p{margin:0;color:#718089;font-size:11px;line-height:1.45}.badge{position:absolute;right:12px;top:12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#7a8b91}
+.lib-foot{height:78px;background:#fff;border-top:1px solid #d2dadd;display:flex;align-items:center;padding:0 5%;gap:18px}.selection-info{font-size:12px;color:#718089}.select-btn{margin-left:auto;background:#244c59;color:#fff;border:0;border-radius:8px;padding:12px 26px;font-weight:700;cursor:pointer}.select-btn:disabled{opacity:.35;cursor:not-allowed}
+.volume{display:none;align-items:center;gap:9px;font-size:12px}.volume.show{display:flex}.volume input{width:80px;padding:9px;border:1px solid #ccd5d8;border-radius:6px}.notice{position:absolute;z-index:50;left:50%;top:50%;transform:translate(-50%,-50%);width:470px;background:#fff;border:1px solid #cbd5d8;border-radius:12px;box-shadow:0 25px 70px #23384050;display:none}.notice.open{display:block}.notice-head{padding:18px 22px;border-bottom:1px solid #e1e6e8;font-weight:800}.notice-body{padding:20px 22px}.notice-body p{font-size:13px;line-height:1.55;margin:0 0 15px}.question{margin:13px 0}.question label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.question input,.question select{width:100%;padding:10px;border:1px solid #ccd5d8;border-radius:6px}.notice-foot{padding:14px 22px;border-top:1px solid #e1e6e8;display:flex;justify-content:flex-end;gap:10px}.primary,.secondary{border:0;border-radius:7px;padding:10px 17px;cursor:pointer}.primary{background:#244c59;color:#fff}.secondary{background:#edf1f2;color:#43545b}
+.toast{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:60;background:#1d3038;color:#fff;border-radius:7px;padding:11px 16px;font-size:12px;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}
+@media(max-height:760px){header{height:60px}.shelf-label{top:7%}.category{height:29%}.bench{height:45%}.lib-head{height:68px}.lib-foot{height:68px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="logo">ChimBox <span>Lab</span></div><div class="headerline"></div><div class="headerhint">Laboratoire virtuel de chimie</div><div class="header-right">Mode local · aucune connexion</div></header>
+<div class="scene" id="scene">
+<div class="wall-light"></div>
+<div class="shelf-label">BIBLIOTHÈQUE</div><div class="shelf"></div>
+<div class="category cat1" data-lib="glass"><div class="flask"><div class="flask-neck"></div><div class="flask-rim"></div><div class="flask-body"></div></div><div class="cat-caption">Verrerie</div></div>
+<div class="category cat2" data-lib="species"><div class="rack"><div class="rack-top"></div><div class="rack-leg l"></div><div class="rack-leg r"></div><div class="test-tube t1"><i></i></div><div class="test-tube t2"><i></i></div><div class="test-tube t3"><i></i></div><div class="rack-base"></div></div><div class="cat-caption">Espèces chimiques</div></div>
+<div class="category cat3" data-lib="material"><div class="phmeter"><div class="ph-rod"></div><div class="ph-body"><div class="dial"></div></div></div><div class="cat-caption">Matériel</div></div>
+<div class="bench"><div class="bench-front"></div><div class="slots" id="slots"></div></div>
+<div class="hovercard" id="hovercard"></div>
+<div class="toast" id="toast"></div>
+
+<div class="library" id="library">
+<div class="lib-head"><div class="lib-title" id="libTitle"></div><div class="lib-sub" id="libSub"></div><button class="close" id="closeLib">Fermer</button></div>
+<div class="lib-body"><div class="cards" id="cards"></div></div>
+<div class="lib-foot"><div class="selection-info" id="selectionInfo">Aucun élément sélectionné.</div><div class="volume" id="volumeBox">Volume <input id="volumeInput" type="number" min="1" max="250" step="1" value="100"> mL</div><button class="select-btn" id="selectBtn" disabled>Sélectionner</button></div>
+</div>
+
+<div class="notice" id="notice"><div class="notice-head" id="noticeTitle"></div><div class="notice-body" id="noticeBody"></div><div class="notice-foot"><button class="secondary" id="noticeCancel">Annuler</button><button class="primary" id="noticeOk">Valider</button></div></div>
+</div>
+</div>
+<script>
+const species=[
+{name:"Eau distillée",formula:"H₂O",nature:"liquide",density:1.00,color:"#dceff5",label:"incolore"},
+{name:"Éthanol",formula:"C₂H₆O",nature:"liquide",density:0.789,color:"#eaf6fa",label:"incolore"},
+{name:"Solution de chlorure de sodium",formula:"NaCl(aq)",nature:"liquide",density:1.03,color:"#e6f3f7",label:"incolore"},
+{name:"Solution de sulfate de cuivre(II)",formula:"CuSO₄(aq)",nature:"liquide",density:1.10,color:"#338dcc",label:"bleu"},
+{name:"Solution de chlorure de fer(III)",formula:"FeCl₃(aq)",nature:"liquide",density:1.10,color:"#c97832",label:"orange"},
+{name:"Solution de permanganate de potassium",formula:"KMnO₄(aq)",nature:"liquide",density:1.02,color:"#7d4aa6",label:"violet"}
+];
+const glassware=[{id:"beaker",name:"Bécher",type:"verrerie",capacity:250,emptyMass:110}];
+const materials=[
+{id:"balance",name:"Balance",group:"Mesure",desc:"Mesure de masse"},
+{id:"ph",name:"pH-mètre",group:"Mesure",desc:"Mesure du pH"},
+{id:"thermo",name:"Thermomètre",group:"Mesure",desc:"Mesure de température"},
+{id:"lighter",name:"Briquet",group:"Action",desc:"Source de chaleur"}
+];
+let currentLib=null,selected=null,selectedVolume=null,slots=[null,null,null],noticeAction=null;
+
+const $=id=>document.getElementById(id), library=$("library"),cards=$("cards"),selectBtn=$("selectBtn"),selectionInfo=$("selectionInfo"),volumeBox=$("volumeBox"),volumeInput=$("volumeInput"),hovercard=$("hovercard"),toast=$("toast");
+
+function openLibrary(type){
+ currentLib=type;selected=null;selectedVolume=null;
+ const data=type==="glass"?glassware:type==="species"?species:materials;
+ $("libTitle").textContent=type==="glass"?"Verrerie":type==="species"?"Espèces chimiques":"Matériel";
+ $("libSub").textContent=type==="glass"?"Contenants disponibles":type==="species"?"Liquides et espèces disponibles":"Instruments et actions";
+ cards.innerHTML=data.map((x,i)=>cardHTML(type,x,i)).join("");
+ cards.querySelectorAll(".card").forEach(c=>c.onclick=()=>chooseCard(c.dataset.index));
+ volumeBox.classList.toggle("show",type==="glass"||type==="species");
+ selectionInfo.textContent="Aucun élément sélectionné.";
+ selectBtn.disabled=true;library.classList.add("open");
+}
+function cardHTML(type,x,i){
+ let visual="";
+ if(type==="glass") visual='<div class="beaker"><div class="beaker-glass"></div><div class="beaker-rim"></div><div class="graduations"></div><div class="beaker-label">250 mL max</div></div>';
+ else if(type==="species") visual='<div style="width:100px;height:65px;border:3px solid #a9bcc3;border-top:0;border-radius:0 0 20px 20px;background:'+x.color+';box-shadow:inset 12px 0 #fff5"></div>';
+ else visual='<div class="material-icon">'+(x.id==="ph"?"pH":x.id==="balance"?"g":x.id==="thermo"?"°C":"H")+'</div>';
+ return '<div class="card" data-index="'+i+'"><span class="badge">'+(type==="material"?x.group:"")+'</span><div class="card-visual">'+visual+'</div><h3>'+x.name+'</h3><p>'+(type==="glass"?"Capacité "+x.capacity+" mL · "+x.emptyMass+" g à vide":type==="species"?x.formula+" · "+x.nature+" · "+x.label+" · "+x.density.toFixed(2)+" g/mL":x.desc)+'</p></div>';
+}
+function chooseCard(i){
+ const data=currentLib==="glass"?glassware:currentLib==="species"?species:materials;
+ selected=data[i];
+ cards.querySelectorAll(".card").forEach((c,j)=>c.classList.toggle("selected",j==i));
+ if(currentLib==="glass"){selectedVolume=250;volumeInput.value=250}
+ if(currentLib==="species"){selectedVolume=100;volumeInput.value=100}
+ selectionInfo.textContent="Sélection : "+selected.name;
+ selectBtn.disabled=false;
+}
+$("closeLib").onclick=()=>library.classList.remove("open");
+selectBtn.onclick=()=>{
+ if(!selected)return;
+ if(currentLib==="glass"||currentLib==="species"){
+   selectedVolume=Number(volumeInput.value);
+   const max=currentLib==="glass"?selected.capacity:250;
+   if(!selectedVolume||selectedVolume<1||selectedVolume>max){showToast("Volume non valide.");return}
+ }
+ library.classList.remove("open");
+ showToast("Élément sélectionné. Cliquez sur un emplacement de la paillasse.");
+ window.pending={type:currentLib,item:selected,volume:selectedVolume};
+};
+document.querySelectorAll(".category").forEach(c=>c.onclick=()=>openLibrary(c.dataset.lib));
+
+function renderSlots(){
+ $("slots").innerHTML=slots.map((s,i)=>{
+  if(!s)return '<div class="slot" data-slot="'+i+'"><div class="slot-label">EMPLACEMENT '+(i+1)+'</div><div class="slot-content"></div></div>';
+  let visual="";
+  if(s.kind==="glass"||s.kind==="species"){
+    let color=s.kind==="species"?s.item.color:"#dff5ff";
+    let liquid=s.kind==="species"?'<div class="liquidfill" style="background:'+color+'"></div>':'';
+    visual='<div class="beaker"><div class="beaker-glass"></div><div class="beaker-rim"></div>'+liquid+'<div class="graduations"></div><div class="beaker-label">'+(s.kind==="glass"?"Bécher vide":s.item.name)+'</div></div>';
+  }else{
+    visual='<div class="material-icon">'+(s.item.id==="ph"?"pH":s.item.id==="balance"?"g":s.item.id==="thermo"?"°C":"H")+'</div>';
+  }
+  return '<div class="slot" data-slot="'+i+'"><div class="slot-label">EMPLACEMENT '+(i+1)+'</div><div class="slot-content">'+visual+'</div></div>';
+ }).join("");
+ $("slots").querySelectorAll(".slot").forEach(s=>{
+  const i=Number(s.dataset.slot);
+  s.addEventListener("click",()=>placeAt(i));
+  s.addEventListener("mouseenter",e=>showHover(i,e));
+  s.addEventListener("mousemove",e=>moveHover(e));
+  s.addEventListener("mouseleave",()=>hovercard.style.display="none");
+ });
+}
+function placeAt(i){
+ const p=window.pending;if(!p){showToast("Sélectionnez d'abord un élément dans une bibliothèque.");return}
+ if(p.type==="material"){
+   if(!slots[i]){showToast("Le matériel doit être utilisé sur un emplacement déjà occupé.");return}
+   useMaterial(i,p.item);window.pending=null;return;
+ }
+ if(slots[i]){showToast("Cet emplacement est déjà occupé.");return}
+ if(p.type==="species"&&p.item.nature!=="liquide"){showToast("Cette espèce est liquide : un bécher est nécessaire.");return}
+ slots[i]={kind:p.type,item:p.item,volume:p.volume,mass:null,temp:null,ph:null};
+ window.pending=null;renderSlots();showToast("Élément placé sur l'emplacement "+(i+1)+".");
+}
+function showHover(i,e){
+ const s=slots[i];if(!s)return;
+ hovercard.style.display="block";moveHover(e);
+ let html="<strong>"+(s.kind==="glass"?"Bécher":s.item.name)+"</strong>";
+ if(s.kind==="species"){html+='<div class="detail"><span>Volume constaté</span><b>'+s.volume+' mL</b></div><div class="detail"><span>Masse volumique</span><b>'+s.item.density.toFixed(2)+' g/mL</b></div>'}
+ else if(s.kind==="glass"){html+='<div class="detail"><span>Volume constaté</span><b>0 mL</b></div><div class="detail"><span>Masse</span><b>'+(s.mass===null?"—":s.mass.toFixed(1)+" g")+'</b></div>'}
+ if(s.kind==="species")html+='<div class="detail"><span>Masse</span><b>'+(s.mass===null?"—":s.mass.toFixed(1)+" g")+'</b></div>';
+ html+='<div class="detail"><span>Température</span><b>'+(s.temp===null?"—":s.temp.toFixed(1)+" °C")+'</b></div><div class="detail"><span>pH</span><b>'+(s.ph===null?"—":s.ph.toFixed(2))+'</b></div>';
+ hovercard.innerHTML=html;
+}
+function moveHover(e){hovercard.style.left=(e.clientX+16)+"px";hovercard.style.top=(e.clientY-10)+"px"}
+
+function useMaterial(i,m){
+ const s=slots[i];
+ if(m.id==="balance"){
+  if(s.kind!=="species"){showToast("La balance nécessite un liquide dans le bécher.");return}
+  const total=110+s.volume*s.item.density;
+  openNotice("Balance — mesure de masse",
+   '<p>La masse mesurée vaut <b>'+total.toFixed(1)+' g</b> mais connaissez-vous la masse du bécher vide ?</p><div class="question"><label>Masse du bécher vide</label><input id="answer" type="number" step="0.1" placeholder="Valeur en g"></div>',
+   ()=>{const v=Number($("answer").value);if(Math.abs(v-110)<.01){s.mass=s.volume*s.item.density;renderSlots();showToast("Mesure validée : masse du liquide enregistrée.");return true}showToast("Réponse incorrecte. La masse du bécher vide est 110 g.");return false});
+ }else if(m.id==="ph"){
+  if(s.kind!=="species"){showToast("Le pH-mètre doit être utilisé avec une solution.");return}
+  openNotice("pH-mètre — protocole",
+   '<p>Avant la mesure, indiquez la procédure correcte.</p><div class="question"><label>1. État de la sonde</label><select id="q1"><option value="">Choisir…</option><option>La rincer à l’eau distillée puis l’essuyer délicatement</option><option>La sécher avec un papier en frottant fortement</option><option>La laisser sèche sans rinçage</option></select></div><div class="question"><label>2. Pendant la mesure</label><select id="q2"><option value="">Choisir…</option><option>Immerger la sonde, agiter doucement puis attendre une valeur stable</option><option>Plonger tout le boîtier dans la solution</option><option>Poser la sonde au fond du bécher et attendre</option></select></div><div class="question"><label>3. Après la mesure</label><select id="q3"><option value="">Choisir…</option><option>Rincer la sonde et la remettre selon le protocole de conservation</option><option>La sécher complètement et la laisser à l’air libre</option><option>La rincer à l’éthanol</option></select></div>',
+   ()=>{const ok=$("q1").value==="La rincer à l’eau distillée puis l’essuyer délicatement"&&$("q2").value==="Immerger la sonde, agiter doucement puis attendre une valeur stable"&&$("q3").value==="Rincer la sonde et la remettre selon le protocole de conservation";if(ok){s.ph=calcPH(s.item);renderSlots();showToast("Protocole correct : pH enregistré.");return true}showToast("Protocole incorrect. Relisez les étapes.");return false});
+ }else if(m.id==="thermo"){
+  if(s.kind!=="species"){showToast("Le thermomètre doit être utilisé avec le contenu du bécher.");return}
+  openNotice("Thermomètre — protocole",
+   '<p>Comment réaliser correctement une mesure de température dans le bécher ?</p><div class="question"><label>Position de la sonde</label><select id="qt1"><option value="">Choisir…</option><option>Immergée dans le liquide sans toucher le fond ni les parois</option><option>Posée contre le fond du bécher</option><option>Maintenue hors du liquide</option></select></div><div class="question"><label>Lecture</label><select id="qt2"><option value="">Choisir…</option><option>Attendre une valeur stable avant de lire</option><option>Lire immédiatement après immersion</option><option>Retirer la sonde avant de lire</option></select></div>',
+   ()=>{const ok=$("qt1").value==="Immergée dans le liquide sans toucher le fond ni les parois"&&$("qt2").value==="Attendre une valeur stable avant de lire";if(ok){s.temp=20;renderSlots();showToast("Protocole correct : température enregistrée.");return true}showToast("Protocole incorrect.");return false});
+ }else{
+  openNotice("Briquet — utilisation",
+   '<p>Avant toute action, indiquez la règle essentielle d’utilisation.</p><div class="question"><label>Procédure</label><select id="ql"><option value="">Choisir…</option><option>Allumer loin des matières inflammables et ne chauffer qu’un matériel adapté</option><option>Allumer directement au-dessus du liquide</option><option>Laisser le briquet allumé sans surveillance</option></select></div>',
+   ()=>{const ok=$("ql").value==="Allumer loin des matières inflammables et ne chauffer qu’un matériel adapté";if(ok){showToast("Utilisation validée : action exécutée.");return true}showToast("Procédure incorrecte.");return false});
+ }
+}
+function calcPH(s){if(s.name.includes("chlorure de sodium"))return 7.00;if(s.name.includes("sulfate de cuivre"))return 4.00;if(s.name.includes("fer(III)"))return 2.00;if(s.name.includes("permanganate"))return 6.00;if(s.name==="Éthanol")return 7.00;return 7.00}
+function openNotice(title,body,okfn){$("noticeTitle").textContent=title;$("noticeBody").innerHTML=body;noticeAction=okfn;$("notice").classList.add("open")}
+$("noticeCancel").onclick=()=>{$("notice").classList.remove("open");noticeAction=null};
+$("noticeOk").onclick=()=>{if(noticeAction&&noticeAction()){$("notice").classList.remove("open");noticeAction=null}};
+
+function showToast(t){toast.textContent=t;toast.classList.add("show");clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove("show"),2300)}
+renderSlots();
+</script>
+</body>
+</html>

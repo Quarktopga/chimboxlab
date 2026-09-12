@@ -5,33 +5,41 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ChimBox Lab</title>
 <style>
-:root{--wall:#d9edf5;--wood:#a87952;--wood-dark:#795237;--bench:#9b6848;--glass:#dff5ff;--ink:#17232b;--muted:#60727d;--white:#fff;--red:#bd3c3c}
-*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:#c8d9df}
+:root{--wall:#dff1f7;--wall2:#cfe7ef;--wood:#a8744d;--wood2:#8e5d3e;--wood3:#6d452f;--bench:#9a6544;--bench2:#7c4f37;--ink:#26343a;--muted:#6d7e85;--glass:#cfeaf2;--glassline:#6f8c95;--red:#c9433d}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--wall)}
 button{font:inherit}.app{height:100vh;min-width:1100px;display:flex;flex-direction:column}
-header{height:70px;background:#fff;border-bottom:1px solid #ccd6da;display:flex;align-items:center;padding:0 30px;z-index:5}
-.logo{font-weight:800;font-size:23px;letter-spacing:-.5px}.logo span{font-weight:400;color:#71818a}.headerline{height:24px;width:1px;background:#d6dde0;margin:0 18px}.headerhint{font-size:13px;color:#71818a}.header-right{margin-left:auto;font-size:12px;color:#75858c}
-.scene{position:relative;flex:1;overflow:hidden;background:var(--wall)}
-.wall-light{position:absolute;inset:0;background:linear-gradient(115deg,#e8f6fa 0,#d9edf5 55%,#cfe6ef 100%)}
-.shelf{position:absolute;left:7%;right:7%;top:15%;height:18px;background:linear-gradient(#bd916a,#9a6b48);border-radius:3px;box-shadow:0 7px 0 #754e37,0 12px 22px #526b7550}
-.shelf-label{position:absolute;top:10%;left:7%;font-size:12px;letter-spacing:2px;font-weight:700;color:#718892}
-.category{position:absolute;top:2%;width:24%;height:31%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s}
-.category:hover{transform:translateY(-3px)}.cat1{left:9%}.cat2{left:38%}.cat3{right:9%}
-.cat-caption{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:12px;font-weight:700;color:#536871;opacity:.9}
-.flask{width:95px;height:125px;position:relative}.flask-neck{position:absolute;left:37px;top:0;width:21px;height:53px;border:3px solid #71838b;border-bottom:0;background:#ffffff65}.flask-body{position:absolute;left:5px;right:5px;bottom:0;height:82px;border:3px solid #71838b;border-radius:12px 12px 38px 38px;background:#ffffff55;transform:skewX(-5deg)}.flask-rim{position:absolute;left:33px;top:-4px;width:29px;height:8px;border:3px solid #71838b;border-radius:4px;background:#eefaff}
-.rack{width:145px;height:115px;position:relative}.rack-base{position:absolute;bottom:9px;left:8px;right:8px;height:18px;background:#795238;border-radius:4px;box-shadow:inset 0 3px #a97958}.rack-top{position:absolute;top:0;left:8px;right:8px;height:17px;background:#8c6042;border-radius:4px}.rack-leg{position:absolute;top:12px;bottom:10px;width:10px;background:#765039}.rack-leg.l{left:14px}.rack-leg.r{right:14px}.test-tube{position:absolute;top:10px;width:25px;height:83px;border:2px solid #a8bdc5;border-top:0;border-radius:0 0 13px 13px;background:#ffffff55;overflow:hidden}.test-tube:before{content:"";position:absolute;top:-4px;left:-2px;right:-2px;height:7px;border:2px solid #a8bdc5;border-radius:3px;background:#eefaff}.test-tube i{position:absolute;bottom:2px;left:2px;right:2px;height:54%;border-radius:0 0 9px 9px}.t1{left:31px}.t2{left:61px}.t3{left:91px}.t1 i{background:#3d8fd0}.t2 i{background:#df8743}.t3 i{background:#59a56d}
-.phmeter{width:150px;height:125px;position:relative}.ph-rod{position:absolute;left:23px;top:4px;width:8px;height:92px;background:#20252a;border-radius:5px;transform:rotate(7deg)}.ph-body{position:absolute;right:6px;top:12px;width:83px;height:62px;background:#d74a43;border:4px solid #762d2d;border-radius:9px;box-shadow:inset 0 3px #f4877e}.dial{position:absolute;left:15px;top:11px;width:45px;height:35px;border-radius:50%;background:#f4eeee;border:2px solid #633b3b}.dial:after{content:"";position:absolute;left:21px;top:7px;width:2px;height:17px;background:#242424;transform:rotate(18deg);transform-origin:bottom}
-.bench{position:absolute;left:0;right:0;bottom:0;height:47%;background:linear-gradient(180deg,#b9825d 0,#9b6848 10%,#8d5d42 100%);border-top:10px solid #744c37;box-shadow:inset 0 15px 35px #633f2c55}
-.bench-front{position:absolute;inset:35px 4% 10% 4%;border:2px solid #6f4935;border-radius:12px;background:linear-gradient(180deg,#a9704f,#8f5d43);box-shadow:inset 0 2px #c99470}
-.slots{position:absolute;left:7%;right:7%;top:13%;bottom:15%;display:grid;grid-template-columns:repeat(3,1fr);gap:5%}
-.slot{position:relative;border:2px dashed #d5aa8b;border-radius:13px;background:#ffffff12;transition:.15s}.slot:hover{background:#fff2;border-color:#f0d0b9}.slot-label{position:absolute;top:9px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:1.5px;color:#e5c3aa;font-weight:700}.slot-content{position:absolute;inset:27px 10px 10px;display:flex;align-items:center;justify-content:center}
-.beaker{width:120px;height:135px;position:relative}.beaker-glass{position:absolute;left:15px;right:15px;top:22px;bottom:4px;border:3px solid #b5d0d8;border-top:0;border-radius:3px 3px 13px 13px;background:#ffffff55;box-shadow:inset 8px 0 #ffffff45}.beaker-rim{position:absolute;left:10px;right:10px;top:17px;height:11px;border:3px solid #b5d0d8;border-radius:4px;background:#eefaffaa}.liquidfill{position:absolute;left:18px;right:18px;bottom:8px;height:42%;border-radius:0 0 9px 9px;opacity:.78}.graduations{position:absolute;right:22px;top:45px;width:20px;height:68px;border-right:1px solid #7e979f;background:repeating-linear-gradient(to bottom,transparent 0 12px,#7e979f 12px 13px)}.beaker-label{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:10px;color:#50646d;font-weight:700}
-.item-icon{max-width:120px;max-height:105px}.material-icon{font-size:28px}
-.hovercard{position:absolute;display:none;z-index:20;width:250px;background:#fff;border:1px solid #cfd7da;border-radius:8px;padding:12px 14px;box-shadow:0 12px 30px #334b5550;font-size:12px;pointer-events:none}.hovercard strong{display:block;font-size:13px;margin-bottom:7px}.detail{display:flex;justify-content:space-between;padding:3px 0;border-top:1px solid #edf0f1}.detail span:first-child{color:#718089}
-.library{position:absolute;inset:0;background:#edf4f6eF;backdrop-filter:blur(3px);z-index:30;display:none;flex-direction:column}.library.open{display:flex}.lib-head{height:78px;background:#fff;border-bottom:1px solid #d2dadd;display:flex;align-items:center;padding:0 34px}.lib-title{font-size:22px;font-weight:800}.lib-sub{margin-left:16px;color:#77868c;font-size:12px}.close{margin-left:auto;border:1px solid #cdd6d9;background:#fff;border-radius:7px;padding:8px 14px;cursor:pointer}.lib-body{flex:1;padding:30px 5%;overflow:auto}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:#fff;border:1px solid #d4dddf;border-radius:12px;min-height:190px;padding:18px;cursor:pointer;transition:.15s;position:relative}.card:hover{transform:translateY(-2px);box-shadow:0 9px 25px #51656e20}.card.selected{border:2px solid #385f6d;box-shadow:0 0 0 3px #b9d2da}.card-visual{height:82px;display:flex;align-items:center;justify-content:center}.card h3{margin:8px 0 4px;font-size:14px}.card p{margin:0;color:#718089;font-size:11px;line-height:1.45}.badge{position:absolute;right:12px;top:12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#7a8b91}
-.lib-foot{height:78px;background:#fff;border-top:1px solid #d2dadd;display:flex;align-items:center;padding:0 5%;gap:18px}.selection-info{font-size:12px;color:#718089}.select-btn{margin-left:auto;background:#244c59;color:#fff;border:0;border-radius:8px;padding:12px 26px;font-weight:700;cursor:pointer}.select-btn:disabled{opacity:.35;cursor:not-allowed}
-.volume{display:none;align-items:center;gap:9px;font-size:12px}.volume.show{display:flex}.volume input{width:80px;padding:9px;border:1px solid #ccd5d8;border-radius:6px}.notice{position:absolute;z-index:50;left:50%;top:50%;transform:translate(-50%,-50%);width:470px;background:#fff;border:1px solid #cbd5d8;border-radius:12px;box-shadow:0 25px 70px #23384050;display:none}.notice.open{display:block}.notice-head{padding:18px 22px;border-bottom:1px solid #e1e6e8;font-weight:800}.notice-body{padding:20px 22px}.notice-body p{font-size:13px;line-height:1.55;margin:0 0 15px}.question{margin:13px 0}.question label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.question input,.question select{width:100%;padding:10px;border:1px solid #ccd5d8;border-radius:6px}.notice-foot{padding:14px 22px;border-top:1px solid #e1e6e8;display:flex;justify-content:flex-end;gap:10px}.primary,.secondary{border:0;border-radius:7px;padding:10px 17px;cursor:pointer}.primary{background:#244c59;color:#fff}.secondary{background:#edf1f2;color:#43545b}
+header{height:64px;background:#fafdfe;border-bottom:1px solid #c8d7dc;display:flex;align-items:center;padding:0 30px;z-index:5;box-shadow:0 2px 12px #60747d18}
+.logo{font-weight:850;font-size:23px;letter-spacing:-.7px}.logo span{font-weight:400;color:#718087}.headerline{height:25px;width:1px;background:#d5dfe2;margin:0 18px}.headerhint{font-size:13px;color:#72838a}.header-right{margin-left:auto;font-size:12px;color:#75868d}
+.scene{position:relative;flex:1;overflow:hidden;background:linear-gradient(135deg,var(--wall),var(--wall2))}
+.wall-light{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 20%,#fff8,transparent 55%),linear-gradient(180deg,#e9f7fb00 0 55%,#b8d6df28 100%)}
+.wall-light:after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:#fff8}
+.shelf-label{position:absolute;top:8.5%;left:7%;font-size:11px;letter-spacing:2.5px;font-weight:800;color:#70838b}
+.shelf{position:absolute;left:6%;right:6%;top:14.5%;height:18px;background:linear-gradient(180deg,#c08b62 0,#a8754f 45%,#8e5e40 100%);border-radius:3px;box-shadow:0 5px 0 #6e4935,0 11px 22px #526b7550}
+.shelf:before,.shelf:after{content:"";position:absolute;top:-2px;width:18px;height:22px;background:#855739;border-radius:2px}.shelf:before{left:3%}.shelf:after{right:3%}
+.category{position:absolute;top:1.5%;width:25%;height:31%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .18s,filter .18s;z-index:2}
+.category:hover{transform:translateY(-4px);filter:drop-shadow(0 9px 8px #526b7535)}.cat1{left:8%}.cat2{left:37.5%}.cat3{right:8%}.cat-caption{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-size:12px;font-weight:750;color:#5d7179}.cat-svg{width:150px;height:145px;overflow:visible}
+.bench{position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,#b27b57 0,#986442 10%,#815137 100%);border-top:9px solid #704831;box-shadow:inset 0 15px 35px #5e3e2d42}
+.bench:before{content:"";position:absolute;left:0;right:0;top:9px;height:3px;background:#d39b73aa}
+.bench-front{position:absolute;left:5%;right:5%;top:36px;bottom:10%;border:2px solid #68432f;border-radius:12px;background:linear-gradient(180deg,#a96f4d,#8c5a40);box-shadow:inset 0 2px #c18a65}
+.bench-front:before,.bench-front:after{content:"";position:absolute;bottom:0;width:15%;height:42%;background:#75493266;border:1px solid #6d442f}.bench-front:before{left:10%}.bench-front:after{right:10%}
+.slots{position:absolute;left:7%;right:7%;top:12%;bottom:14%;display:grid;grid-template-columns:repeat(3,1fr);gap:4.5%;z-index:4}
+.slot{position:relative;border:2px dashed #d9b394;border-radius:13px;background:#fff0;transition:.15s}.slot:hover{background:#fff12;border-color:#f1d2b9}.slot.has{border-style:solid;border-color:#c79a79;background:#ffffff0a}
+.slot-label{position:absolute;top:9px;left:0;right:0;text-align:center;font-size:9px;letter-spacing:1.5px;color:#e9c9b0;font-weight:800}
+.slot-content{position:absolute;inset:27px 10px 10px;display:flex;align-items:center;justify-content:center}
+.beaker{width:132px;height:142px;position:relative}.beaker-glass{position:absolute;left:12px;right:12px;top:22px;bottom:4px;border:3px solid var(--glassline);border-top:0;border-radius:3px 3px 15px 15px;background:linear-gradient(90deg,#ffffff48,#d9f4fa2a 48%,#fff6);box-shadow:inset 8px 0 #fff4,0 5px 8px #4d362d22}
+.beaker-rim{position:absolute;left:7px;right:7px;top:16px;height:12px;border:3px solid var(--glassline);border-radius:4px;background:#eaf9fcaa;box-shadow:0 2px 4px #0001}
+.liquidfill{position:absolute;left:16px;right:16px;bottom:8px;height:43%;border-radius:0 0 11px 11px;opacity:.82;box-shadow:inset 5px 0 #fff3,inset -4px 0 #0001}
+.graduations{position:absolute;right:19px;top:46px;width:23px;height:72px;border-right:1px solid #6d8790;background:repeating-linear-gradient(to bottom,transparent 0 12px,#6d8790 12px 13px)}
+.graduations:after{content:"250\A 200\A 150\A 100\A 50";white-space:pre;position:absolute;right:27px;top:-2px;font-size:7px;line-height:13px;color:#607981;text-align:right}
+.beaker-label{position:absolute;bottom:-1px;left:0;right:0;text-align:center;font-size:9px;color:#526870;font-weight:800}
+.material-icon{font-size:28px;font-weight:850;color:#263238}
+.material-symbol{width:90px;height:90px;border-radius:10px;display:grid;place-items:center;background:#ffffff25;border:2px solid #d6b394;color:#f1d7c0;font-size:25px;font-weight:850}
+.hovercard{position:fixed;display:none;z-index:100;width:260px;background:#fff;border:1px solid #cbd6da;border-radius:8px;padding:12px 14px;box-shadow:0 14px 34px #334b5550;font-size:12px;pointer-events:none}.hovercard strong{display:block;font-size:13px;margin-bottom:7px}.detail{display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid #edf0f1}.detail span:first-child{color:#718089}
+.library{position:absolute;inset:0;background:#edf5f7F2;backdrop-filter:blur(4px);z-index:30;display:none;flex-direction:column}.library.open{display:flex}.lib-head{height:76px;background:#fff;border-bottom:1px solid #d2dadd;display:flex;align-items:center;padding:0 34px}.lib-title{font-size:22px;font-weight:850}.lib-sub{margin-left:16px;color:#77868c;font-size:12px}.close{margin-left:auto;border:1px solid #cdd6d9;background:#fff;border-radius:7px;padding:8px 14px;cursor:pointer}.lib-body{flex:1;padding:30px 5%;overflow:auto}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:#fff;border:1px solid #d4dddf;border-radius:12px;min-height:190px;padding:18px;cursor:pointer;transition:.15s;position:relative}.card:hover{transform:translateY(-2px);box-shadow:0 9px 25px #51656e20}.card.selected{border:2px solid #385f6d;box-shadow:0 0 0 3px #b9d2da}.card-visual{height:82px;display:flex;align-items:center;justify-content:center}.card h3{margin:8px 0 4px;font-size:14px}.card p{margin:0;color:#718089;font-size:11px;line-height:1.45}.badge{position:absolute;right:12px;top:12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#7a8b91}
+.lib-foot{height:78px;background:#fff;border-top:1px solid #d2dadd;display:flex;align-items:center;padding:0 5%;gap:18px}.selection-info{font-size:12px;color:#718089}.select-btn{margin-left:auto;background:#244c59;color:#fff;border:0;border-radius:8px;padding:12px 26px;font-weight:700;cursor:pointer}.select-btn:disabled{opacity:.35;cursor:not-allowed}.volume{display:none;align-items:center;gap:9px;font-size:12px}.volume.show{display:flex}.volume input{width:80px;padding:9px;border:1px solid #ccd5d8;border-radius:6px}
+.notice{position:absolute;z-index:50;left:50%;top:50%;transform:translate(-50%,-50%);width:470px;background:#fff;border:1px solid #cbd5d8;border-radius:12px;box-shadow:0 25px 70px #23384050;display:none}.notice.open{display:block}.notice-head{padding:18px 22px;border-bottom:1px solid #e1e6e8;font-weight:800}.notice-body{padding:20px 22px}.notice-body p{font-size:13px;line-height:1.55;margin:0 0 15px}.question{margin:13px 0}.question label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.question input,.question select{width:100%;padding:10px;border:1px solid #ccd5d8;border-radius:6px}.notice-foot{padding:14px 22px;border-top:1px solid #e1e6e8;display:flex;justify-content:flex-end;gap:10px}.primary,.secondary{border:0;border-radius:7px;padding:10px 17px;cursor:pointer}.primary{background:#244c59;color:#fff}.secondary{background:#edf1f2;color:#43545b}
 .toast{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:60;background:#1d3038;color:#fff;border-radius:7px;padding:11px 16px;font-size:12px;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}
-@media(max-height:760px){header{height:60px}.shelf-label{top:7%}.category{height:29%}.bench{height:45%}.lib-head{height:68px}.lib-foot{height:68px}}
+@media(max-height:760px){header{height:58px}.shelf-label{top:7%}.category{height:29%}.bench{height:45%}.lib-head{height:68px}.lib-foot{height:68px}}
 </style>
 </head>
 <body>
@@ -40,9 +48,7 @@ header{height:70px;background:#fff;border-bottom:1px solid #ccd6da;display:flex;
 <div class="scene" id="scene">
 <div class="wall-light"></div>
 <div class="shelf-label">BIBLIOTHÈQUE</div><div class="shelf"></div>
-<div class="category cat1" data-lib="glass"><div class="flask"><div class="flask-neck"></div><div class="flask-rim"></div><div class="flask-body"></div></div><div class="cat-caption">Verrerie</div></div>
-<div class="category cat2" data-lib="species"><div class="rack"><div class="rack-top"></div><div class="rack-leg l"></div><div class="rack-leg r"></div><div class="test-tube t1"><i></i></div><div class="test-tube t2"><i></i></div><div class="test-tube t3"><i></i></div><div class="rack-base"></div></div><div class="cat-caption">Espèces chimiques</div></div>
-<div class="category cat3" data-lib="material"><div class="phmeter"><div class="ph-rod"></div><div class="ph-body"><div class="dial"></div></div></div><div class="cat-caption">Matériel</div></div>
+<div class="category cat1" data-lib="glass"><svg class="cat-svg" viewBox="0 0 150 145" aria-hidden="true"><defs><linearGradient id="fg" x1="0" x2="1"><stop stop-color="#fff" stop-opacity=".65"/><stop offset=".5" stop-color="#d8f3fa" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".65"/></linearGradient></defs><path d="M64 11h22v44l34 39c11 13 2 37-15 39H45c-18-2-26-26-15-39l34-39V11Z" fill="url(#fg)" stroke="#6f8790" stroke-width="3"/><path d="M59 10h32v8H59z" fill="#eaf8fb" stroke="#6f8790" stroke-width="3" rx="3"/><path d="M40 99h70" stroke="#8aa0a7" stroke-width="2" opacity=".7"/><path d="M76 55v-40" stroke="#fff" stroke-width="4" opacity=".55"/></svg><div class="cat-caption">Verrerie</div></div><div class="category cat2" data-lib="species"><svg class="cat-svg" viewBox="0 0 150 145" aria-hidden="true"><rect x="22" y="91" width="106" height="27" rx="4" fill="#815536"/><rect x="26" y="88" width="98" height="8" rx="2" fill="#a87550"/><rect x="28" y="31" width="9" height="63" fill="#754c32"/><rect x="113" y="31" width="9" height="63" fill="#754c32"/><rect x="21" y="25" width="108" height="12" rx="3" fill="#93603e"/><g stroke="#a9c0c7" stroke-width="2" fill="#ffffff30"><path d="M47 35v49c0 10 17 10 17 0V35"/><path d="M67 35v49c0 10 17 10 17 0V35"/><path d="M87 35v49c0 10 17 10 17 0V35"/></g><g><path d="M49 58h13v26c0 8-13 8-13 0z" fill="#3e91d1"/><path d="M69 58h13v26c0 8-13 8-13 0z" fill="#df8743"/><path d="M89 58h13v26c0 8-13 8-13 0z" fill="#59a56d"/></g><g fill="#eaf9fc" stroke="#91a9b1"><rect x="45" y="32" width="21" height="6" rx="2"/><rect x="65" y="32" width="21" height="6" rx="2"/><rect x="85" y="32" width="21" height="6" rx="2"/></g></svg><div class="cat-caption">Espèces chimiques</div></div><div class="category cat3" data-lib="material"><svg class="cat-svg" viewBox="0 0 150 145" aria-hidden="true"><rect x="86" y="37" width="57" height="55" rx="8" fill="#d54b43" stroke="#7b302e" stroke-width="4"/><rect x="92" y="43" width="45" height="43" rx="5" fill="#e76056"/><ellipse cx="114" cy="64" rx="17" ry="13" fill="#f6eeee" stroke="#643d3d" stroke-width="2"/><path d="M114 63l7-7" stroke="#222" stroke-width="3" stroke-linecap="round"/><rect x="48" y="20" width="8" height="103" rx="4" fill="#20262a" transform="rotate(7 52 72)"/><circle cx="52" cy="123" r="5" fill="#20262a"/></svg><div class="cat-caption">Matériel</div></div><div class="ph-body"><div class="dial"></div></div></div><div class="cat-caption">Matériel</div></div>
 <div class="bench"><div class="bench-front"></div><div class="slots" id="slots"></div></div>
 <div class="hovercard" id="hovercard"></div>
 <div class="toast" id="toast"></div>
@@ -73,8 +79,7 @@ const materials=[
 {id:"lighter",name:"Briquet",group:"Action",desc:"Source de chaleur"}
 ];
 let currentLib=null,selected=null,selectedVolume=null,slots=[null,null,null],noticeAction=null;
-
-const $=id=>document.getElementById(id), library=$("library"),cards=$("cards"),selectBtn=$("selectBtn"),selectionInfo=$("selectionInfo"),volumeBox=$("volumeBox"),volumeInput=$("volumeInput"),hovercard=$("hovercard"),toast=$("toast");
+const $=id=>document.getElementById(id),library=$("library"),cards=$("cards"),selectBtn=$("selectBtn"),selectionInfo=$("selectionInfo"),volumeBox=$("volumeBox"),volumeInput=$("volumeInput"),hovercard=$("hovercard"),toast=$("toast");
 
 function openLibrary(type){
  currentLib=type;selected=null;selectedVolume=null;
@@ -82,38 +87,35 @@ function openLibrary(type){
  $("libTitle").textContent=type==="glass"?"Verrerie":type==="species"?"Espèces chimiques":"Matériel";
  $("libSub").textContent=type==="glass"?"Contenants disponibles":type==="species"?"Liquides et espèces disponibles":"Instruments et actions";
  cards.innerHTML=data.map((x,i)=>cardHTML(type,x,i)).join("");
- cards.querySelectorAll(".card").forEach(c=>c.onclick=()=>chooseCard(c.dataset.index));
+ cards.querySelectorAll(".card").forEach(c=>c.onclick=()=>chooseCard(Number(c.dataset.index)));
  volumeBox.classList.toggle("show",type==="glass"||type==="species");
  selectionInfo.textContent="Aucun élément sélectionné.";
  selectBtn.disabled=true;library.classList.add("open");
 }
 function cardHTML(type,x,i){
  let visual="";
- if(type==="glass") visual='<div class="beaker"><div class="beaker-glass"></div><div class="beaker-rim"></div><div class="graduations"></div><div class="beaker-label">250 mL max</div></div>';
- else if(type==="species") visual='<div style="width:100px;height:65px;border:3px solid #a9bcc3;border-top:0;border-radius:0 0 20px 20px;background:'+x.color+';box-shadow:inset 12px 0 #fff5"></div>';
- else visual='<div class="material-icon">'+(x.id==="ph"?"pH":x.id==="balance"?"g":x.id==="thermo"?"°C":"H")+'</div>';
+ if(type==="glass")visual='<div class="beaker"><div class="beaker-glass"></div><div class="beaker-rim"></div><div class="graduations"></div><div class="beaker-label">250 mL max</div></div>';
+ else if(type==="species")visual='<div style="width:105px;height:68px;border:3px solid #a9bcc3;border-top:0;border-radius:0 0 20px 20px;background:'+x.color+';box-shadow:inset 12px 0 #fff5, inset -8px 0 #0001"></div>';
+ else visual='<div class="material-symbol">'+(x.id==="ph"?"pH":x.id==="balance"?"g":x.id==="thermo"?"°C":"H")+'</div>';
  return '<div class="card" data-index="'+i+'"><span class="badge">'+(type==="material"?x.group:"")+'</span><div class="card-visual">'+visual+'</div><h3>'+x.name+'</h3><p>'+(type==="glass"?"Capacité "+x.capacity+" mL · "+x.emptyMass+" g à vide":type==="species"?x.formula+" · "+x.nature+" · "+x.label+" · "+x.density.toFixed(2)+" g/mL":x.desc)+'</p></div>';
 }
 function chooseCard(i){
- const data=currentLib==="glass"?glassware:currentLib==="species"?species:materials;
- selected=data[i];
- cards.querySelectorAll(".card").forEach((c,j)=>c.classList.toggle("selected",j==i));
+ const data=currentLib==="glass"?glassware:currentLib==="species"?species:materials;selected=data[i];
+ cards.querySelectorAll(".card").forEach((c,j)=>c.classList.toggle("selected",j===i));
  if(currentLib==="glass"){selectedVolume=250;volumeInput.value=250}
  if(currentLib==="species"){selectedVolume=100;volumeInput.value=100}
- selectionInfo.textContent="Sélection : "+selected.name;
- selectBtn.disabled=false;
+ selectionInfo.textContent="Sélection : "+selected.name;selectBtn.disabled=false;
 }
 $("closeLib").onclick=()=>library.classList.remove("open");
 selectBtn.onclick=()=>{
  if(!selected)return;
  if(currentLib==="glass"||currentLib==="species"){
-   selectedVolume=Number(volumeInput.value);
-   const max=currentLib==="glass"?selected.capacity:250;
+   selectedVolume=Number(volumeInput.value);const max=250;
    if(!selectedVolume||selectedVolume<1||selectedVolume>max){showToast("Volume non valide.");return}
  }
  library.classList.remove("open");
- showToast("Élément sélectionné. Cliquez sur un emplacement de la paillasse.");
  window.pending={type:currentLib,item:selected,volume:selectedVolume};
+ showToast(currentLib==="species"?"Sélectionnez un bécher vide sur la paillasse.":"Sélectionnez un emplacement sur la paillasse.");
 };
 document.querySelectorAll(".category").forEach(c=>c.onclick=()=>openLibrary(c.dataset.lib));
 
@@ -122,42 +124,47 @@ function renderSlots(){
   if(!s)return '<div class="slot" data-slot="'+i+'"><div class="slot-label">EMPLACEMENT '+(i+1)+'</div><div class="slot-content"></div></div>';
   let visual="";
   if(s.kind==="glass"||s.kind==="species"){
-    let color=s.kind==="species"?s.item.color:"#dff5ff";
-    let liquid=s.kind==="species"?'<div class="liquidfill" style="background:'+color+'"></div>':'';
-    visual='<div class="beaker"><div class="beaker-glass"></div><div class="beaker-rim"></div>'+liquid+'<div class="graduations"></div><div class="beaker-label">'+(s.kind==="glass"?"Bécher vide":s.item.name)+'</div></div>';
-  }else{
-    visual='<div class="material-icon">'+(s.item.id==="ph"?"pH":s.item.id==="balance"?"g":s.item.id==="thermo"?"°C":"H")+'</div>';
-  }
-  return '<div class="slot" data-slot="'+i+'"><div class="slot-label">EMPLACEMENT '+(i+1)+'</div><div class="slot-content">'+visual+'</div></div>';
+    const color=s.kind==="species"?s.item.color:"#dff5ff";
+    const liquid=s.kind==="species"?'<div class="liquidfill" style="background:'+color+'"></div>':"";
+    visual='<div class="beaker"><div class="beaker-glass"></div><div class="beaker-rim"></div>'+liquid+'<div class="graduations"></div><div class="beaker-label">'+(s.kind==="species"?s.item.name:"Bécher vide")+'</div></div>';
+  }else visual='<div class="material-icon">'+(s.item.id==="ph"?"pH":s.item.id==="balance"?"g":s.item.id==="thermo"?"°C":"H")+'</div>';
+  return '<div class="slot has" data-slot="'+i+'"><div class="slot-label">EMPLACEMENT '+(i+1)+'</div><div class="slot-content">'+visual+'</div></div>';
  }).join("");
  $("slots").querySelectorAll(".slot").forEach(s=>{
-  const i=Number(s.dataset.slot);
-  s.addEventListener("click",()=>placeAt(i));
-  s.addEventListener("mouseenter",e=>showHover(i,e));
-  s.addEventListener("mousemove",e=>moveHover(e));
-  s.addEventListener("mouseleave",()=>hovercard.style.display="none");
+  const i=Number(s.dataset.slot);s.addEventListener("click",()=>placeAt(i));
+  s.addEventListener("mouseenter",e=>showHover(i,e));s.addEventListener("mousemove",e=>moveHover(e));s.addEventListener("mouseleave",()=>hovercard.style.display="none");
  });
 }
 function placeAt(i){
- const p=window.pending;if(!p){showToast("Sélectionnez d'abord un élément dans une bibliothèque.");return}
+ const p=window.pending;
+ if(!p){showToast("Sélectionnez d'abord un élément dans une bibliothèque.");return}
+ const s=slots[i];
  if(p.type==="material"){
-   if(!slots[i]){showToast("Le matériel doit être utilisé sur un emplacement déjà occupé.");return}
+   if(!s){showToast("Le matériel doit être utilisé sur un emplacement déjà occupé.");return}
    useMaterial(i,p.item);window.pending=null;return;
  }
- if(slots[i]){showToast("Cet emplacement est déjà occupé.");return}
- if(p.type==="species"&&p.item.nature!=="liquide"){showToast("Cette espèce est liquide : un bécher est nécessaire.");return}
- slots[i]={kind:p.type,item:p.item,volume:p.volume,mass:null,temp:null,ph:null};
- window.pending=null;renderSlots();showToast("Élément placé sur l'emplacement "+(i+1)+".");
+ if(p.type==="glass"){
+   if(s){showToast("Cet emplacement est déjà occupé. Choisissez un emplacement vide.");return}
+   slots[i]={kind:"glass",item:p.item,volume:0,mass:null,temp:null,ph:null};window.pending=null;renderSlots();showToast("Bécher vide placé.");return;
+ }
+ if(p.type==="species"){
+   if(!s){showToast("Impossible de déposer une solution ici : placez d'abord un bécher vide.");return}
+   if(s.kind!=="glass"){showToast("Cette espèce doit être placée dans un bécher vide.");return}
+   if(p.volume>s.item.capacity){showToast("Le volume dépasse la capacité du bécher.");return}
+   s.kind="species";s.item=p.item;s.volume=p.volume;s.mass=null;s.temp=null;s.ph=null;
+   window.pending=null;renderSlots();showToast(p.item.name+" ajouté au bécher.");
+ }
 }
 function showHover(i,e){
  const s=slots[i];if(!s)return;
  hovercard.style.display="block";moveHover(e);
- let html="<strong>"+(s.kind==="glass"?"Bécher":s.item.name)+"</strong>";
- if(s.kind==="species"){html+='<div class="detail"><span>Volume constaté</span><b>'+s.volume+' mL</b></div><div class="detail"><span>Masse volumique</span><b>'+s.item.density.toFixed(2)+' g/mL</b></div>'}
- else if(s.kind==="glass"){html+='<div class="detail"><span>Volume constaté</span><b>0 mL</b></div><div class="detail"><span>Masse</span><b>'+(s.mass===null?"—":s.mass.toFixed(1)+" g")+'</b></div>'}
- if(s.kind==="species")html+='<div class="detail"><span>Masse</span><b>'+(s.mass===null?"—":s.mass.toFixed(1)+" g")+'</b></div>';
- html+='<div class="detail"><span>Température</span><b>'+(s.temp===null?"—":s.temp.toFixed(1)+" °C")+'</b></div><div class="detail"><span>pH</span><b>'+(s.ph===null?"—":s.ph.toFixed(2))+'</b></div>';
- hovercard.innerHTML=html;
+ let name=s.kind==="glass"?"Bécher":s.item.name,html="<strong>"+name+"</strong>";
+ if(s.kind==="glass"){
+  html+='<div class="detail"><span>Volume constaté</span><b>0 mL</b></div><div class="detail"><span>Masse à vide</span><b>110 g</b></div>';
+ }else if(s.kind==="species"){
+  html+='<div class="detail"><span>Volume constaté</span><b>'+s.volume+' mL</b></div><div class="detail"><span>Masse volumique</span><b>'+s.item.density.toFixed(3)+' g/mL</b></div><div class="detail"><span>Masse</span><b>'+(s.mass===null?"—":s.mass.toFixed(1)+" g")+'</b></div>';
+ }
+ if(s.kind==="species")html+='<div class="detail"><span>Température</span><b>'+(s.temp===null?"—":s.temp.toFixed(1)+" °C")+'</b></div><div class="detail"><span>pH</span><b>'+(s.ph===null?"—":s.ph.toFixed(2))+'</b></div>';
 }
 function moveHover(e){hovercard.style.left=(e.clientX+16)+"px";hovercard.style.top=(e.clientY-10)+"px"}
 
@@ -166,32 +173,35 @@ function useMaterial(i,m){
  if(m.id==="balance"){
   if(s.kind!=="species"){showToast("La balance nécessite un liquide dans le bécher.");return}
   const total=110+s.volume*s.item.density;
-  openNotice("Balance — mesure de masse",
-   '<p>La masse mesurée vaut <b>'+total.toFixed(1)+' g</b> mais connaissez-vous la masse du bécher vide ?</p><div class="question"><label>Masse du bécher vide</label><input id="answer" type="number" step="0.1" placeholder="Valeur en g"></div>',
-   ()=>{const v=Number($("answer").value);if(Math.abs(v-110)<.01){s.mass=s.volume*s.item.density;renderSlots();showToast("Mesure validée : masse du liquide enregistrée.");return true}showToast("Réponse incorrecte. La masse du bécher vide est 110 g.");return false});
+  openNotice("Balance — mesure de masse",'<p>La masse mesurée vaut <b>'+total.toFixed(1)+' g</b> mais connaissez-vous la masse du bécher vide ?</p><div class="question"><label>Masse du bécher vide</label><input id="answer" type="number" step="0.1" placeholder="Valeur en g"></div>',()=>{
+   const v=Number($("answer").value);
+   if(Math.abs(v-110)<.01){s.mass=s.volume*s.item.density;renderSlots();showToast("Mesure validée : masse du liquide enregistrée.");return true}
+   showToast("Réponse incorrecte. La masse du bécher vide est 110 g.");return false;
+  });
  }else if(m.id==="ph"){
   if(s.kind!=="species"){showToast("Le pH-mètre doit être utilisé avec une solution.");return}
-  openNotice("pH-mètre — protocole",
-   '<p>Avant la mesure, indiquez la procédure correcte.</p><div class="question"><label>1. État de la sonde</label><select id="q1"><option value="">Choisir…</option><option>La rincer à l’eau distillée puis l’essuyer délicatement</option><option>La sécher avec un papier en frottant fortement</option><option>La laisser sèche sans rinçage</option></select></div><div class="question"><label>2. Pendant la mesure</label><select id="q2"><option value="">Choisir…</option><option>Immerger la sonde, agiter doucement puis attendre une valeur stable</option><option>Plonger tout le boîtier dans la solution</option><option>Poser la sonde au fond du bécher et attendre</option></select></div><div class="question"><label>3. Après la mesure</label><select id="q3"><option value="">Choisir…</option><option>Rincer la sonde et la remettre selon le protocole de conservation</option><option>La sécher complètement et la laisser à l’air libre</option><option>La rincer à l’éthanol</option></select></div>',
-   ()=>{const ok=$("q1").value==="La rincer à l’eau distillée puis l’essuyer délicatement"&&$("q2").value==="Immerger la sonde, agiter doucement puis attendre une valeur stable"&&$("q3").value==="Rincer la sonde et la remettre selon le protocole de conservation";if(ok){s.ph=calcPH(s.item);renderSlots();showToast("Protocole correct : pH enregistré.");return true}showToast("Protocole incorrect. Relisez les étapes.");return false});
+  openNotice("pH-mètre — protocole",'<p>Avant la mesure, indiquez la procédure correcte.</p><div class="question"><label>1. État de la sonde</label><select id="q1"><option value="">Choisir…</option><option>La rincer à l’eau distillée puis l’essuyer délicatement</option><option>La sécher avec un papier en frottant fortement</option><option>La laisser sèche sans rinçage</option></select></div><div class="question"><label>2. Pendant la mesure</label><select id="q2"><option value="">Choisir…</option><option>Immerger la sonde, agiter doucement puis attendre une valeur stable</option><option>Plonger tout le boîtier dans la solution</option><option>Poser la sonde au fond du bécher et attendre</option></select></div><div class="question"><label>3. Après la mesure</label><select id="q3"><option value="">Choisir…</option><option>Rincer la sonde et la remettre selon le protocole de conservation</option><option>La sécher complètement et la laisser à l’air libre</option><option>La rincer à l’éthanol</option></select></div>',()=>{
+   const ok=$("q1").value==="La rincer à l’eau distillée puis l’essuyer délicatement"&&$("q2").value==="Immerger la sonde, agiter doucement puis attendre une valeur stable"&&$("q3").value==="Rincer la sonde et la remettre selon le protocole de conservation";
+   if(ok){s.ph=calcPH(s.item);renderSlots();showToast("Protocole correct : pH enregistré.");return true}showToast("Protocole incorrect. Relisez les étapes.");return false;
+  });
  }else if(m.id==="thermo"){
   if(s.kind!=="species"){showToast("Le thermomètre doit être utilisé avec le contenu du bécher.");return}
-  openNotice("Thermomètre — protocole",
-   '<p>Comment réaliser correctement une mesure de température dans le bécher ?</p><div class="question"><label>Position de la sonde</label><select id="qt1"><option value="">Choisir…</option><option>Immergée dans le liquide sans toucher le fond ni les parois</option><option>Posée contre le fond du bécher</option><option>Maintenue hors du liquide</option></select></div><div class="question"><label>Lecture</label><select id="qt2"><option value="">Choisir…</option><option>Attendre une valeur stable avant de lire</option><option>Lire immédiatement après immersion</option><option>Retirer la sonde avant de lire</option></select></div>',
-   ()=>{const ok=$("qt1").value==="Immergée dans le liquide sans toucher le fond ni les parois"&&$("qt2").value==="Attendre une valeur stable avant de lire";if(ok){s.temp=20;renderSlots();showToast("Protocole correct : température enregistrée.");return true}showToast("Protocole incorrect.");return false});
+  openNotice("Thermomètre — protocole",'<p>Comment réaliser correctement une mesure de température dans le bécher ?</p><div class="question"><label>Position de la sonde</label><select id="qt1"><option value="">Choisir…</option><option>Immergée dans le liquide sans toucher le fond ni les parois</option><option>Posée contre le fond du bécher</option><option>Maintenue hors du liquide</option></select></div><div class="question"><label>Lecture</label><select id="qt2"><option value="">Choisir…</option><option>Attendre une valeur stable avant de lire</option><option>Lire immédiatement après immersion</option><option>Retirer la sonde avant de lire</option></select></div>',()=>{
+   const ok=$("qt1").value==="Immergée dans le liquide sans toucher le fond ni les parois"&&$("qt2").value==="Attendre une valeur stable avant de lire";
+   if(ok){s.temp=20;renderSlots();showToast("Protocole correct : température enregistrée.");return true}showToast("Protocole incorrect.");return false;
+  });
  }else{
-  openNotice("Briquet — utilisation",
-   '<p>Avant toute action, indiquez la règle essentielle d’utilisation.</p><div class="question"><label>Procédure</label><select id="ql"><option value="">Choisir…</option><option>Allumer loin des matières inflammables et ne chauffer qu’un matériel adapté</option><option>Allumer directement au-dessus du liquide</option><option>Laisser le briquet allumé sans surveillance</option></select></div>',
-   ()=>{const ok=$("ql").value==="Allumer loin des matières inflammables et ne chauffer qu’un matériel adapté";if(ok){showToast("Utilisation validée : action exécutée.");return true}showToast("Procédure incorrecte.");return false});
+  openNotice("Briquet — utilisation",'<p>Avant toute action, indiquez la règle essentielle d’utilisation.</p><div class="question"><label>Procédure</label><select id="ql"><option value="">Choisir…</option><option>Allumer loin des matières inflammables et ne chauffer qu’un matériel adapté</option><option>Allumer directement au-dessus du liquide</option><option>Laisser le briquet allumé sans surveillance</option></select></div>',()=>{
+   const ok=$("ql").value==="Allumer loin des matières inflammables et ne chauffer qu’un matériel adapté";
+   if(ok){showToast("Utilisation validée : action exécutée.");return true}showToast("Procédure incorrecte.");return false;
+  });
  }
 }
-function calcPH(s){if(s.name.includes("chlorure de sodium"))return 7.00;if(s.name.includes("sulfate de cuivre"))return 4.00;if(s.name.includes("fer(III)"))return 2.00;if(s.name.includes("permanganate"))return 6.00;if(s.name==="Éthanol")return 7.00;return 7.00}
+function calcPH(s){if(s.name.includes("chlorure de sodium"))return 7;if(s.name.includes("sulfate de cuivre"))return 4;if(s.name.includes("fer(III)"))return 2;if(s.name.includes("permanganate"))return 6;if(s.name==="Éthanol")return 7;return 7}
 function openNotice(title,body,okfn){$("noticeTitle").textContent=title;$("noticeBody").innerHTML=body;noticeAction=okfn;$("notice").classList.add("open")}
 $("noticeCancel").onclick=()=>{$("notice").classList.remove("open");noticeAction=null};
 $("noticeOk").onclick=()=>{if(noticeAction&&noticeAction()){$("notice").classList.remove("open");noticeAction=null}};
-
 function showToast(t){toast.textContent=t;toast.classList.add("show");clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove("show"),2300)}
 renderSlots();
-</script>
-</body>
+</script></body>
 </html>
